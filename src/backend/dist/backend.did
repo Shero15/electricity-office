@@ -1,0 +1,323 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type Timestamp = nat;
+type SlotAvailability = 
+ record {
+   available: bool;
+   remaining: nat;
+   slot: text;
+ };
+type ServiceView = 
+ record {
+   active: bool;
+   code: text;
+   descriptionAr: text;
+   descriptionEn: text;
+   descriptionKu: text;
+   fee: nat;
+   id: ServiceId;
+   nameAr: text;
+   nameEn: text;
+   nameKu: text;
+   requiredDocumentsAr: vec text;
+   requiredDocumentsEn: vec text;
+   requiredDocumentsKu: vec text;
+ };
+type ServiceId = nat;
+type RetentionSettingsView = 
+ record {
+   appointmentRetentionDays: nat;
+   auditRetentionDays: nat;
+ };
+type Result__2 = 
+ variant {
+   err: Error__1;
+   ok;
+ };
+type Result__1 = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Result_6 = 
+ variant {
+   err: Error;
+   ok: DeviceView;
+ };
+type Result_5 = 
+ variant {
+   err: Error;
+   ok: AppointmentDetail;
+ };
+type Result_4 = 
+ variant {
+   err: Error;
+   ok: AppointmentView;
+ };
+type Result_3 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result_2 = 
+ variant {
+   err: Error;
+   ok: BranchView;
+ };
+type Result_1 = 
+ variant {
+   err: Error;
+   ok: ServiceView;
+ };
+type Result = 
+ variant {
+   err: Error;
+   ok: CustomerView;
+ };
+type RegisterInput = 
+ record {
+   email: opt text;
+   fullName: text;
+   language: Language;
+   nationalId: text;
+   phone: text;
+ };
+type QrVerification = 
+ variant {
+   alreadyCheckedIn: AppointmentDetail;
+   cancelled: AppointmentDetail;
+   invalid;
+   valid: AppointmentDetail;
+ };
+type ProfileUpdate = 
+ record {
+   email: opt text;
+   fullName: opt text;
+   language: opt Language;
+ };
+type NotificationSettingsView = 
+ record {
+   appointmentCancelled: bool;
+   appointmentConfirmed: bool;
+   appointmentReminder: bool;
+   appointmentRequested: bool;
+   appointmentRescheduled: bool;
+   checkIn: bool;
+   registrationVerification: bool;
+ };
+type Language = 
+ variant {
+   ar;
+   en;
+   ku;
+ };
+type Error__1 = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type Error = 
+ variant {
+   conflict: text;
+   duplicatePhone;
+   internal;
+   invalidInput: text;
+   notAuthorized;
+   notFound;
+   rateLimited;
+ };
+type DeviceView = 
+ record {
+   createdAt: Timestamp;
+   deviceLabel: text;
+   id: DeviceId;
+   lastSeenAt: Timestamp;
+   revoked: bool;
+ };
+type DeviceId = nat;
+type CustomerView = 
+ record {
+   createdAt: Timestamp;
+   email: opt text;
+   fullName: text;
+   id: CustomerId;
+   language: Language;
+   nationalId: text;
+   phone: text;
+   verified: bool;
+ };
+type CustomerId = nat;
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type BranchView = 
+ record {
+   active: bool;
+   addressAr: text;
+   addressEn: text;
+   addressKu: text;
+   code: text;
+   id: BranchId;
+   nameAr: text;
+   nameEn: text;
+   nameKu: text;
+   phone: text;
+ };
+type BranchId = nat;
+type BookingInput = 
+ record {
+   branchId: BranchId;
+   date: text;
+   notes: text;
+   serviceId: ServiceId;
+   slot: text;
+ };
+type AuditId = nat;
+type AuditEntryView = 
+ record {
+   action: AuditAction;
+   actorPrincipal: principal;
+   createdAt: Timestamp;
+   detail: text;
+   id: AuditId;
+   subject: text;
+ };
+type AuditAction = 
+ variant {
+   accessDenied;
+   bookingCancelled;
+   bookingCreated;
+   bookingRescheduled;
+   checkIn;
+   deviceRevoked;
+   qrScan;
+   qrVerified;
+   registration;
+   roleAssigned;
+   settingsChanged;
+   signIn;
+   signOut;
+   statusChanged;
+   verification;
+ };
+type AppointmentView = 
+ record {
+   branchId: BranchId;
+   checkedInAt: opt Timestamp;
+   createdAt: Timestamp;
+   date: text;
+   id: AppointmentId;
+   notes: text;
+   reference: text;
+   serviceId: ServiceId;
+   slot: text;
+   status: AppointmentStatus;
+   updatedAt: Timestamp;
+ };
+type AppointmentStatus = 
+ variant {
+   cancelled;
+   checkedIn;
+   confirmed;
+   requested;
+   rescheduled;
+ };
+type AppointmentId = nat;
+type AppointmentFilter = 
+ record {
+   branchId: opt BranchId;
+   date: opt text;
+   search: opt text;
+   serviceId: opt ServiceId;
+   status: opt text;
+ };
+type AppointmentDetail = 
+ record {
+   appointment: AppointmentView;
+   branch: opt BranchView;
+   qrToken: text;
+   "service": opt ServiceView;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result__2);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  bookAppointment: (input: BookingInput) -> (Result_5);
+  cancelMyAppointment: (appointmentId: AppointmentId) -> (Result_5);
+  checkInAppointment: (token: text) -> (QrVerification);
+  completeAccountRecovery: (phone: text, token: text) -> (Result);
+  execute: (qJson: text) -> (Result__1) query;
+  getApiDoc: () -> (text) query;
+  getAvailability: (serviceId: ServiceId, branchId: BranchId, date: text) ->
+   (vec SlotAvailability) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getMyAppointment: (appointmentId: AppointmentId) -> (Result_5) query;
+  getMyProfile: () -> (Result) query;
+  getNotificationSettings: () -> (NotificationSettingsView) query;
+  getOfficeLocations: () -> (vec BranchView) query;
+  getRetentionSettings: () -> (RetentionSettingsView) query;
+  getServiceCatalogue: () -> (vec ServiceView) query;
+  isCallerAdmin: () -> (bool) query;
+  listAllAppointments: (filter: AppointmentFilter) ->
+   (vec AppointmentView) query;
+  listAuditLog: (limit: nat) -> (vec AuditEntryView) query;
+  listBranches: () -> (vec BranchView) query;
+  listMyAppointments: () -> (vec AppointmentView) query;
+  listMyDevices: () -> (vec DeviceView) query;
+  listServices: () -> (vec ServiceView) query;
+  recordSignIn: () -> ();
+  registerCustomer: (input: RegisterInput) -> (Result);
+  registerMyDevice: (deviceLabel: text) -> (Result_6);
+  requestPhoneVerification: (phone: text) -> (Result_3);
+  rescheduleMyAppointment: (appointmentId: AppointmentId, date: text, slot:
+   text) -> (Result_5);
+  revokeMyDevice: (deviceId: DeviceId) -> (Result_3);
+  schema: () -> (text) query;
+  setAppointmentStatus: (appointmentId: AppointmentId, status:
+   AppointmentStatus) -> (Result_4);
+  setSlotCapacity: (branchId: BranchId, serviceId: ServiceId, perSlot:
+   nat) -> (Result_3);
+  startAccountRecovery: (phone: text) -> (Result_3);
+  updateMyProfile: (update: ProfileUpdate) -> (Result);
+  updateNotificationSettings: (settings: NotificationSettingsView) ->
+   (NotificationSettingsView);
+  updateRetentionSettings: (settings: RetentionSettingsView) ->
+   (RetentionSettingsView);
+  upsertBranch: (branch: BranchView) -> (Result_2);
+  upsertService: ("service": ServiceView) -> (Result_1);
+  verifyAppointmentQr: (token: text) -> (QrVerification);
+  verifyPhone: (phone: text, code: text) -> (Result);
+}

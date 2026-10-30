@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "General Sans";
+    --font-mono: "Geist Mono";
+    --radius: 0.5rem;
+
+    /* Civic Grid — light (primary). Clean white paper, deep navy authority, electricity blue accent. */
+    --background: 0.995 0.003 250;
+    --foreground: 0.22 0.045 258;
+    --card: 1 0 0;
+    --card-foreground: 0.22 0.045 258;
+    --popover: 1 0 0;
+    --popover-foreground: 0.22 0.045 258;
+
+    --primary: 0.28 0.088 258;
+    --primary-foreground: 0.985 0.006 250;
+
+    --secondary: 0.955 0.012 250;
+    --secondary-foreground: 0.3 0.06 258;
+    --muted: 0.96 0.01 250;
+    --muted-foreground: 0.52 0.035 256;
+
+    --accent: 0.58 0.185 251;
+    --accent-foreground: 0.99 0.004 250;
+
+    --destructive: 0.52 0.2 26;
+    --destructive-foreground: 0.99 0.004 26;
+    --success: 0.55 0.13 158;
+    --success-foreground: 0.99 0.004 158;
+    --warning: 0.72 0.15 78;
+    --warning-foreground: 0.22 0.045 78;
+
+    --border: 0.9 0.012 252;
+    --input: 0.9 0.012 252;
+    --ring: 0.58 0.185 251;
+
+    --chart-1: 0.58 0.185 251;
+    --chart-2: 0.28 0.088 258;
+    --chart-3: 0.68 0.14 205;
+    --chart-4: 0.72 0.15 78;
+    --chart-5: 0.55 0.13 158;
+
+    --sidebar: 0.985 0.008 252;
+    --sidebar-foreground: 0.22 0.045 258;
+    --sidebar-primary: 0.28 0.088 258;
+    --sidebar-primary-foreground: 0.985 0.006 250;
+    --sidebar-accent: 0.955 0.012 250;
+    --sidebar-accent-foreground: 0.3 0.06 258;
+    --sidebar-border: 0.9 0.012 252;
+    --sidebar-ring: 0.58 0.185 251;
+
+    /* Gradient + depth tokens */
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.28 0.088 258) 0%,
+      oklch(0.42 0.14 254) 55%,
+      oklch(0.58 0.185 251) 100%
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.995 0.003 250) 0%,
+      oklch(0.965 0.012 250) 100%
+    );
+    --gradient-rail: linear-gradient(
+      90deg,
+      oklch(0.28 0.088 258) 0%,
+      oklch(0.58 0.185 251) 45%,
+      oklch(0.72 0.13 220) 100%
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.19 0.035 258;
+    --foreground: 0.95 0.012 250;
+    --card: 0.235 0.04 258;
+    --card-foreground: 0.95 0.012 250;
+    --popover: 0.235 0.04 258;
+    --popover-foreground: 0.95 0.012 250;
+
+    --primary: 0.62 0.17 251;
+    --primary-foreground: 0.16 0.035 258;
+
+    --secondary: 0.29 0.045 258;
+    --secondary-foreground: 0.88 0.015 250;
+    --muted: 0.29 0.045 258;
+    --muted-foreground: 0.66 0.03 254;
+
+    --accent: 0.68 0.17 249;
+    --accent-foreground: 0.16 0.035 258;
+
+    --destructive: 0.62 0.19 26;
+    --destructive-foreground: 0.16 0.035 26;
+    --success: 0.66 0.14 158;
+    --success-foreground: 0.16 0.035 158;
+    --warning: 0.78 0.14 78;
+    --warning-foreground: 0.16 0.035 78;
+
+    --border: 0.34 0.045 258;
+    --input: 0.34 0.045 258;
+    --ring: 0.68 0.17 249;
+
+    --chart-1: 0.68 0.17 249;
+    --chart-2: 0.72 0.13 215;
+    --chart-3: 0.62 0.17 251;
+    --chart-4: 0.78 0.14 78;
+    --chart-5: 0.66 0.14 158;
+
+    --sidebar: 0.215 0.038 258;
+    --sidebar-foreground: 0.95 0.012 250;
+    --sidebar-primary: 0.62 0.17 251;
+    --sidebar-primary-foreground: 0.16 0.035 258;
+    --sidebar-accent: 0.29 0.045 258;
+    --sidebar-accent-foreground: 0.88 0.015 250;
+    --sidebar-border: 0.34 0.045 258;
+    --sidebar-ring: 0.68 0.17 249;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.24 0.07 258) 0%,
+      oklch(0.4 0.13 254) 55%,
+      oklch(0.62 0.17 251) 100%
+    );
+    --gradient-subtle: linear-gradient(
+      180deg,
+      oklch(0.19 0.035 258) 0%,
+      oklch(0.235 0.04 258) 100%
+    );
+    --gradient-rail: linear-gradient(
+      90deg,
+      oklch(0.62 0.17 251) 0%,
+      oklch(0.72 0.13 215) 100%
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-subtle {
+    background-image: var(--gradient-subtle);
+  }
+
+  /* Signature: voltage rail — thin current-flow divider */
+  .voltage-rail {
+    height: 2px;
+    background-image: var(--gradient-rail);
+    background-size: 200% 100%;
+    animation: rail-flow 6s linear infinite;
+  }
+
+  .shadow-subtle {
+    box-shadow: 0 1px 2px 0 oklch(0.28 0.088 258 / 0.06);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 1px 3px 0 oklch(0.28 0.088 258 / 0.08), 0 12px 32px -12px
+      oklch(0.28 0.088 258 / 0.18);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}

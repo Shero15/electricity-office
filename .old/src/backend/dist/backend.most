@@ -1,0 +1,373 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AdminState__941666620 =
+  {
+    auditLog : List__836382695<AuditEntry__567661504>;
+    var nextAuditId : Nat;
+    notificationSettings : NotificationSettings__781034151;
+    retentionSettings : RetentionSettings__435410872
+  };
+type AppointmentId__729317175 = Nat;
+type AppointmentId__892410291 = AppointmentId__729317175;
+type AppointmentState__187624998 =
+  {
+    appointments : Map__230067015<Nat, Appointment__940272867>;
+    branches : Map__230067015<Nat, Branch__227548289>;
+    byQrToken : Map__230067015<Text, Nat>;
+    byReference : Map__230067015<Text, Nat>;
+    capacities : Map__230067015<Text, Capacity__502382165>;
+    var nextAppointmentId : Nat;
+    var nextBranchId : Nat;
+    var nextServiceId : Nat;
+    services : Map__230067015<Nat, Service__919547737>
+  };
+type AppointmentStatus__105197975 =
+  {#cancelled; #checkedIn; #confirmed; #requested; #rescheduled};
+type AppointmentStatus__977522708 =
+  {#cancelled; #checkedIn; #confirmed; #requested; #rescheduled};
+type Appointment__198984327 =
+  {
+    branchId : BranchId__1006864149;
+    var checkedInAt : ?Timestamp__26568175;
+    var createdAt : Timestamp__26568175;
+    customerId : CustomerId__142497219;
+    date : Text;
+    id : AppointmentId__892410291;
+    var notes : Text;
+    var qrToken : Text;
+    reference : Text;
+    serviceId : ServiceId__536725952;
+    slot : Text;
+    var status : AppointmentStatus__105197975;
+    var updatedAt : Timestamp__26568175
+  };
+type Appointment__940272867 =
+  {
+    branchId : Nat;
+    var checkedInAt : ?Nat;
+    var createdAt : Nat;
+    customerId : Nat;
+    date : Text;
+    id : Nat;
+    var notes : Text;
+    var qrToken : Text;
+    reference : Text;
+    serviceId : Nat;
+    slot : Text;
+    var status : AppointmentStatus__977522708;
+    var updatedAt : Nat
+  };
+type AuditAction__1050687260 =
+  {
+    #accessDenied;
+    #bookingCancelled;
+    #bookingCreated;
+    #bookingRescheduled;
+    #checkIn;
+    #deviceRevoked;
+    #qrScan;
+    #qrVerified;
+    #registration;
+    #roleAssigned;
+    #settingsChanged;
+    #signIn;
+    #signOut;
+    #statusChanged;
+    #verification
+  };
+type AuditAction__131088555 =
+  {
+    #accessDenied;
+    #bookingCancelled;
+    #bookingCreated;
+    #bookingRescheduled;
+    #checkIn;
+    #deviceRevoked;
+    #qrScan;
+    #qrVerified;
+    #registration;
+    #roleAssigned;
+    #settingsChanged;
+    #signIn;
+    #signOut;
+    #statusChanged;
+    #verification
+  };
+type AuditEntry__293391054 =
+  {
+    action : AuditAction__131088555;
+    actorPrincipal : Principal;
+    var createdAt : Timestamp__481935476;
+    detail : Text;
+    id : AuditId__939172498;
+    subject : Text
+  };
+type AuditEntry__567661504 =
+  {
+    action : AuditAction__1050687260;
+    actorPrincipal : Principal;
+    var createdAt : Nat;
+    detail : Text;
+    id : Nat;
+    subject : Text
+  };
+type AuditId__344307203 = Nat;
+type AuditId__939172498 = AuditId__344307203;
+type BranchId__1006864149 = BranchId__614897760;
+type BranchId__614897760 = Nat;
+type Branch__188114119 =
+  {
+    var active : Bool;
+    addressAr : Text;
+    addressEn : Text;
+    addressKu : Text;
+    code : Text;
+    id : BranchId__1006864149;
+    nameAr : Text;
+    nameEn : Text;
+    nameKu : Text;
+    phone : Text
+  };
+type Branch__227548289 =
+  {
+    var active : Bool;
+    addressAr : Text;
+    addressEn : Text;
+    addressKu : Text;
+    code : Text;
+    id : Nat;
+    nameAr : Text;
+    nameEn : Text;
+    nameKu : Text;
+    phone : Text
+  };
+type Capacity__1039624819 =
+  {
+    branchId : BranchId__1006864149;
+    var perSlot : Nat;
+    serviceId : ServiceId__536725952
+  };
+type Capacity__502382165 =
+  {branchId : Nat; var perSlot : Nat; serviceId : Nat};
+type CustomerId__1015005394 = Nat;
+type CustomerId__142497219 = CustomerId__1015005394;
+type CustomerId__548046926 = CustomerId__1015005394;
+type CustomerState__561805911 =
+  {
+    byPhone : Map__230067015<Text, Nat>;
+    byPrincipal : Map__230067015<Principal, Nat>;
+    customers : Map__230067015<Nat, Customer__188959275>;
+    devices : Map__230067015<Nat, Device__325195006>;
+    var nextCustomerId : Nat;
+    var nextDeviceId : Nat;
+    recoveryRequests : Map__230067015<Text, RecoveryRequest__564567011>;
+    verificationCodes : Map__230067015<Text, VerificationCode__242597866>
+  };
+type Customer__188959275 =
+  {
+    var createdAt : Nat;
+    var email : ?Text;
+    var fullName : Text;
+    id : Nat;
+    var language : {#ar; #en; #ku};
+    nationalId : Text;
+    phone : Text;
+    principal : Principal;
+    var updatedAt : Nat;
+    var verified : Bool
+  };
+type Customer__192853522 =
+  {
+    var createdAt : Timestamp__980057786;
+    var email : ?Text;
+    var fullName : Text;
+    id : CustomerId__548046926;
+    var language : Language__826722806;
+    nationalId : Text;
+    phone : Text;
+    principal : Principal;
+    var updatedAt : Timestamp__980057786;
+    var verified : Bool
+  };
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type DeviceId__314414375 = DeviceId__795919761;
+type DeviceId__795919761 = Nat;
+type Device__325195006 =
+  {
+    var createdAt : Nat;
+    deviceLabel : Text;
+    id : Nat;
+    var lastSeenAt : Nat;
+    principal : Principal;
+    var revoked : Bool
+  };
+type Device__462643207 =
+  {
+    var createdAt : Timestamp__980057786;
+    deviceLabel : Text;
+    id : DeviceId__314414375;
+    var lastSeenAt : Timestamp__980057786;
+    principal : Principal;
+    var revoked : Bool
+  };
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Language__22065978 = {#ar; #en; #ku};
+type Language__826722806 = Language__22065978;
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type List__355132335<T> =
+  {
+    var blockIndex : Nat__227979830;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__227979830
+  };
+type List__836382695<T> = List__355132335<T>;
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__592872083 =
+  {
+    accessControlState : AccessControlState__201339279;
+    admin : AdminState__941666620;
+    appointments : AppointmentState__187624998;
+    customers : CustomerState__561805911
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type NotificationSettings__127726086 =
+  {
+    var appointmentCancelled : Bool;
+    var appointmentConfirmed : Bool;
+    var appointmentReminder : Bool;
+    var appointmentRequested : Bool;
+    var appointmentRescheduled : Bool;
+    var checkIn : Bool;
+    var registrationVerification : Bool
+  };
+type NotificationSettings__781034151 =
+  {
+    var appointmentCancelled : Bool;
+    var appointmentConfirmed : Bool;
+    var appointmentReminder : Bool;
+    var appointmentRequested : Bool;
+    var appointmentRescheduled : Bool;
+    var checkIn : Bool;
+    var registrationVerification : Bool
+  };
+type OldActor__924191747 = {};
+type RecoveryRequest__564567011 =
+  {var consumed : Bool; var expiresAt : Nat; phone : Text; var token : Text};
+type RecoveryRequest__819121382 =
+  {
+    var consumed : Bool;
+    var expiresAt : Timestamp__980057786;
+    phone : Text;
+    var token : Text
+  };
+type RetentionSettings__431995492 =
+  {var appointmentRetentionDays : Nat; var auditRetentionDays : Nat};
+type RetentionSettings__435410872 =
+  {var appointmentRetentionDays : Nat; var auditRetentionDays : Nat};
+type ServiceId__271116140 = Nat;
+type ServiceId__536725952 = ServiceId__271116140;
+type Service__1072017850 =
+  {
+    var active : Bool;
+    code : Text;
+    descriptionAr : Text;
+    descriptionEn : Text;
+    descriptionKu : Text;
+    fee : Nat;
+    id : ServiceId__536725952;
+    nameAr : Text;
+    nameEn : Text;
+    nameKu : Text;
+    requiredDocumentsAr : [Text];
+    requiredDocumentsEn : [Text];
+    requiredDocumentsKu : [Text]
+  };
+type Service__919547737 =
+  {
+    var active : Bool;
+    code : Text;
+    descriptionAr : Text;
+    descriptionEn : Text;
+    descriptionKu : Text;
+    fee : Nat;
+    id : Nat;
+    nameAr : Text;
+    nameEn : Text;
+    nameKu : Text;
+    requiredDocumentsAr : [Text];
+    requiredDocumentsEn : [Text];
+    requiredDocumentsKu : [Text]
+  };
+type Timestamp__26568175 = Timestamp__301639476;
+type Timestamp__301639476 = Nat;
+type Timestamp__481935476 = Timestamp__301639476;
+type Timestamp__980057786 = Timestamp__301639476;
+type UserRole__91647283 = {#admin; #guest; #user};
+type VerificationCode__1006571527 =
+  {
+    var attempts : Nat;
+    code : Text;
+    var consumed : Bool;
+    var expiresAt : Timestamp__980057786;
+    phone : Text
+  };
+type VerificationCode__242597866 =
+  {
+    var attempts : Nat;
+    code : Text;
+    var consumed : Bool;
+    var expiresAt : Nat;
+    phone : Text
+  };
+{
+  "20261019_000000" : OldActor__924191747 -> NewActor__592872083
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable admin :
+    {
+      auditLog : List__836382695<AuditEntry__293391054>;
+      var nextAuditId : Nat;
+      notificationSettings : NotificationSettings__127726086;
+      retentionSettings : RetentionSettings__431995492
+    };
+  stable appointments :
+    {
+      appointments :
+        Map__230067015<AppointmentId__729317175, Appointment__198984327>;
+      branches : Map__230067015<BranchId__614897760, Branch__188114119>;
+      byQrToken : Map__230067015<Text, AppointmentId__729317175>;
+      byReference : Map__230067015<Text, AppointmentId__729317175>;
+      capacities : Map__230067015<Text, Capacity__1039624819>;
+      var nextAppointmentId : Nat;
+      var nextBranchId : Nat;
+      var nextServiceId : Nat;
+      services : Map__230067015<ServiceId__271116140, Service__1072017850>
+    };
+  stable customers :
+    {
+      byPhone : Map__230067015<Text, CustomerId__1015005394>;
+      byPrincipal : Map__230067015<Principal, CustomerId__1015005394>;
+      customers : Map__230067015<CustomerId__1015005394, Customer__192853522>;
+      devices : Map__230067015<DeviceId__795919761, Device__462643207>;
+      var nextCustomerId : Nat;
+      var nextDeviceId : Nat;
+      recoveryRequests : Map__230067015<Text, RecoveryRequest__819121382>;
+      verificationCodes : Map__230067015<Text, VerificationCode__1006571527>
+    }
+};

@@ -1,0 +1,25 @@
+{
+  "overview": "A multilingual government-style appointment booking portal for an electricity commercial office, with passkey sign-in, real-time slot availability, per-appointment QR codes, and an administrator check-in scanner.",
+  "features": [
+    "Language selection in Kurdish Sorani, Arabic, and English with full right-to-left support",
+    "Customer registration with a unique verified phone number",
+    "Passwordless sign-in with passkeys and device biometrics",
+    "Account recovery and registered device management",
+    "Appointment booking with real server-side availability",
+    "A unique QR code for every appointment",
+    "Administrator-only QR scanner with server-side verification",
+    "Administrator check-in workflow with duplicate-scan protection",
+    "Role-based access control and an audit log",
+    "Service catalogue, office information, and appointment dashboard"
+  ],
+  "category": "appointment-booking",
+  "tags": [
+    "government",
+    "appointment",
+    "multilingual",
+    "rtl",
+    "qr-code",
+    "security"
+  ],
+  "last_updated": "2026-10-19T20:36:21.262Z"
+}
